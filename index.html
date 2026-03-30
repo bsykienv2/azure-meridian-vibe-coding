@@ -559,7 +559,9 @@
     </div>
 </div>
 
-<script>
+<script type="module">
+    import OpenAI from 'https://esm.sh/openai';
+
     document.addEventListener('DOMContentLoaded', () => {
         const toggleChat = document.getElementById('toggleChat');
         const closeChat = document.getElementById('closeChat');
@@ -570,6 +572,36 @@
         const chatForm = document.getElementById('chatForm');
         const chatInput = document.getElementById('chatInput');
         const typingIndicator = document.getElementById('typingIndicator');
+
+        // OpenAI Configuration
+        const openai = new OpenAI({
+            baseURL: "https://9router.vuhai.io.vn/v1",
+            apiKey: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
+            dangerouslyAllowBrowser: true 
+        });
+
+        const brandKnowledge = `
+            Thương hiệu: AZURE MERIDIAN
+            Định vị: Premium Tech Accessories & Lifestyle Solutions.
+            Sản phẩm: Premium Silicone Case (iPhone 15 Pro Max), GaN 65W Fast Charger, ANC Noise Cancelling Headphones.
+            Dịch vụ: Tech Setup Consultancy, Premium Warranty (1 đổi 1 trong 12 tháng), Personalized Accessories (khắc tên).
+            Liên hệ: Email support@azuremeridian.com, Zalo 0988.777.999.
+            Văn phòng: Tầng 20, Tòa nhà công nghệ Azure, TP. Hồ Chí Minh.
+            Phương châm: "Đỉnh cao của sự tinh tế chính là sự đơn giản có tính toán."
+        `;
+
+        const systemPrompt = `Bạn là Trợ Lý Ảo thông minh của thương hiệu AZURE MERIDIAN. 
+        Hãy sử dụng thông tin sau để trả lời khách hàng một cách chuyên nghiệp, tinh tế, và hỗ trợ nhiệt tình.
+        Thông tin thương hiệu:
+        ${brandKnowledge}
+        Yêu cầu:
+        1. Trả lời bằng tiếng Việt.
+        2. Sử dụng định dạng Markdown (đậm, danh sách, code...) để nội dung chuyên nghiệp.
+        3. Luôn giữ phong cách sang trọng, hi-tech phù hợp với thương hiệu.`;
+
+        let messageHistory = [
+            { role: "system", content: systemPrompt }
+        ];
 
         const defaultWelcome = `
             <div class="flex gap-3 max-w-[85%]">
@@ -598,40 +630,49 @@
             
             setTimeout(() => {
                 chatMessages.innerHTML = defaultWelcome;
+                messageHistory = [{ role: "system", content: systemPrompt }];
                 icon.classList.remove('rotate-anim');
             }, 500);
         });
 
         // Chat Logic
-        chatForm.addEventListener('submit', (e) => {
+        chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const message = chatInput.value.trim();
             if (!message) return;
 
-            // Add user message
+            // Add user message to UI
             addMessage(message, 'user');
             chatInput.value = '';
+
+            // Add to history
+            messageHistory.push({ role: "user", content: message });
 
             // Show typing indicator
             typingIndicator.classList.remove('hidden');
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Simulate Bot Response (using Gemini simulation logic)
-            setTimeout(() => {
+            try {
+                // OpenAI API Call
+                const completion = await openai.chat.completions.create({
+                    messages: messageHistory,
+                    model: "ces-chatbot-gpt-5.4",
+                });
+
+                const botResponse = completion.choices[0].message.content;
+
+                // Hide typing indicator and add response
                 typingIndicator.classList.add('hidden');
-                
-                const botResponse = `Cảm ơn bạn đã quan tâm! Tôi là **Trợ lý AI** của Azure Meridian. 
-
-Dưới đây là một số điều tôi có thể hỗ trợ bạn:
-- Tư vấn các dòng **case iPhone** cao cấp.
-- Thông tin về công nghệ sạc nhanh **GaN 65W**.
-- Gợi ý các mẫu tai nghe chống ồn chủ động.
-
-Bạn có muốn tìm hiểu thêm về sản phẩm nào không?
-> Lưu ý: Đây là bản phản hồi thử nghiệm sử dụng \`Marked.js\`.`;
-
                 addMessage(botResponse, 'bot');
-            }, 1500);
+                
+                // Add bot response to history
+                messageHistory.push({ role: "assistant", content: botResponse });
+
+            } catch (error) {
+                console.error("AI Error:", error);
+                typingIndicator.classList.add('hidden');
+                addMessage("Xin lỗi, hiện tại tôi đang gặp chút sự cố kết nối. Vui lòng thử lại sau giây lát!", 'bot');
+            }
         });
 
         function addMessage(text, side) {
