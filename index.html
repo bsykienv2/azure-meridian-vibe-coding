@@ -490,214 +490,299 @@
         </div>
 </footer>
 <!-- Chatbot AI Widget -->
-<div class="fixed bottom-8 right-8 z-[60] flex flex-col items-end">
+<div class="fixed bottom-8 right-8 z-[60] flex flex-col items-end pointer-events-none">
     <!-- Chat Window -->
-    <div id="chatWindow" class="hidden w-[380px] h-[550px] chat-glass rounded-2xl shadow-2xl flex flex-col overflow-hidden mb-6 border border-white/10">
-        <!-- Header -->
-        <div class="p-4 bg-primary/10 border-b border-white/5 flex justify-between items-center">
+    <div id="chatWindow" 
+         class="hidden pointer-events-auto w-[380px] h-[600px] sm:w-[420px] sm:h-[650px] chat-glass rounded-2xl shadow-2xl flex flex-col overflow-hidden mb-6 border border-white/10 transition-all duration-300 translate-y-4 opacity-0 scale-95"
+         style="transform-origin: bottom right;">
+        
+        <!-- UI: Header -->
+        <div class="p-4 bg-primary/10 border-b border-white/5 flex justify-between items-center bg-surface-container-high/40 backdrop-blur-md">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg">
                     <span class="material-symbols-outlined text-on-primary">smart_toy</span>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sm">Trợ Lý Ảo Azure</h4>
+                    <h4 class="font-bold text-sm tracking-tight">Trợ Lý Ảo Độc Quyền</h4>
                     <div class="flex items-center gap-1.5">
                         <span class="w-2 h-2 bg-green-500 rounded-full dot-pulse"></span>
-                        <span class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Online</span>
+                        <span class="text-[10px] text-primary/80 uppercase tracking-widest font-black">AI Assistant</span>
                     </div>
                 </div>
             </div>
             <div class="flex items-center gap-1">
-                <button id="refreshChat" class="p-2 hover:bg-white/5 rounded-full transition-colors group">
+                <button id="refreshChat" class="p-2 hover:bg-white/5 rounded-full transition-all group" title="Làm mới">
                     <span class="material-symbols-outlined text-on-surface-variant text-xl group-hover:text-primary transition-colors">refresh</span>
                 </button>
-                <button id="closeChat" class="p-2 hover:bg-white/5 rounded-full transition-colors group">
+                <button id="closeChat" class="p-2 hover:bg-white/5 rounded-full transition-all group" title="Đóng">
                     <span class="material-symbols-outlined text-on-surface-variant text-xl group-hover:text-error transition-colors">close</span>
                 </button>
             </div>
         </div>
         
-        <!-- Messages Area -->
-        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/10">
-            <div class="flex gap-3 max-w-[85%]">
-                <div class="w-8 h-8 rounded-full bg-surface-container-highest flex-shrink-0 flex items-center justify-center font-bold text-[10px] text-primary">AI</div>
-                <div class="bg-surface-container-high p-3 rounded-2xl rounded-tl-none">
-                    <p class="text-sm">Xin chào! Tôi là Trợ Lý Ảo của Azure Meridian. Tôi có thể giúp gì cho bạn hôm nay?</p>
-                </div>
-            </div>
+        <!-- UI: Messages Area -->
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+            <!-- Messages injected by JS -->
         </div>
 
-        <!-- Typing Indicator -->
+        <!-- UI: Typing Indicator -->
         <div id="typingIndicator" class="hidden px-4 py-2 flex items-center gap-2">
-            <div class="bg-surface-container-high p-2 rounded-xl flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant mr-1">Đang nhập</span>
+            <div class="bg-surface-container-high/60 p-2 rounded-xl flex items-center gap-1.5 backdrop-blur-sm">
+                <span class="text-[10px] text-on-surface-variant mr-1">Trợ lý đang nhập</span>
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
             </div>
         </div>
 
-        <!-- Input Area -->
-        <div class="p-4 bg-primary/5 border-t border-white/5">
+        <!-- UI: Input Area -->
+        <div class="p-4 bg-surface-container-lowest/50 backdrop-blur-md border-t border-white/5">
             <form id="chatForm" class="flex gap-2">
-                <input id="chatInput" type="text" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-surface-container-lowest border-none rounded-lg text-sm focus:ring-1 focus:ring-primary h-11 px-4">
-                <button type="submit" class="w-11 h-11 bg-primary text-on-primary rounded-lg flex items-center justify-center active:scale-95 transition-transform">
+                <input id="chatInput" type="text" placeholder="Hỏi tôi bất cứ điều gì..." 
+                       class="flex-1 bg-surface-container-low border border-white/5 rounded-xl text-sm focus:ring-2 focus:ring-primary h-11 px-4 transition-all placeholder:text-on-surface-variant/50">
+                <button type="submit" class="w-11 h-11 bg-primary text-on-primary rounded-xl flex items-center justify-center active:scale-95 hover:bg-primary-fixed transition-all shadow-lg shadow-primary/10">
                     <span class="material-symbols-outlined">send</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Toggle Button -->
-    <div class="flex items-center group">
-        <div id="chatTooltip" class="mr-4 px-4 py-2 bg-surface-container-highest/90 text-primary text-sm font-bold rounded-lg border border-primary/20 backdrop-blur-xl group-hover:opacity-100 transition-opacity whitespace-nowrap opacity-0">
-            Hỗ trợ AI 24/7
+    <!-- UI: Toggle Button -->
+    <div class="flex items-center group pointer-events-auto">
+        <div id="chatTooltip" class="mr-4 px-4 py-2 bg-primary text-on-primary text-xs font-bold rounded-full shadow-xl transition-all duration-300 translate-x-4 opacity-0 pointer-events-none group-hover:translate-x-0 group-hover:opacity-100">
+            Hỏi Trợ Lý Ngay!
         </div>
-        <button id="toggleChat" class="w-16 h-16 bg-gradient-to-br from-tertiary to-on-tertiary-container rounded-full flex items-center justify-center shadow-2xl shadow-tertiary/20 hover:scale-110 active:scale-90 transition-all">
-            <span class="material-symbols-outlined text-on-tertiary text-3xl">smart_toy</span>
+        <button id="toggleChat" class="w-16 h-16 bg-gradient-to-br from-primary to-primary-container rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90 transition-all border-4 border-surface group">
+            <span class="material-symbols-outlined text-on-primary text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
         </button>
     </div>
 </div>
 
 <script type="module">
+    /**
+     * 🧠 CHATBOT CORE SYSTEM
+     * Tách biệt rõ rệt: UI | Logic | API
+     */
     import OpenAI from 'https://esm.sh/openai';
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const toggleChat = document.getElementById('toggleChat');
-        const closeChat = document.getElementById('closeChat');
-        const chatWindow = document.getElementById('chatWindow');
-        const chatTooltip = document.getElementById('chatTooltip');
-        const refreshChat = document.getElementById('refreshChat');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatForm = document.getElementById('chatForm');
-        const chatInput = document.getElementById('chatInput');
-        const typingIndicator = document.getElementById('typingIndicator');
+    // --- CONFIGURATION & API LAYER ---
+    const CONFIG = {
+        BASE_URL: "https://9router.vuhai.io.vn/v1",
+        API_KEY: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
+        MODEL: "ces-chatbot-gpt-5.4",
+        DATA_FILE: "./chatbot_data.txt"
+    };
 
-        // OpenAI Configuration
-        const openai = new OpenAI({
-            baseURL: "https://9router.vuhai.io.vn/v1",
-            apiKey: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
-            dangerouslyAllowBrowser: true 
-        });
+    const openai = new OpenAI({
+        baseURL: CONFIG.BASE_URL,
+        apiKey: CONFIG.API_KEY,
+        dangerouslyAllowBrowser: true 
+    });
 
-        const brandKnowledge = `
-            Thương hiệu: AZURE MERIDIAN
-            Định vị: Premium Tech Accessories & Lifestyle Solutions.
-            Sản phẩm: Premium Silicone Case (iPhone 15 Pro Max), GaN 65W Fast Charger, ANC Noise Cancelling Headphones.
-            Dịch vụ: Tech Setup Consultancy, Premium Warranty (1 đổi 1 trong 12 tháng), Personalized Accessories (khắc tên).
-            Liên hệ: Email support@azuremeridian.com, Zalo 0988.777.999.
-            Văn phòng: Tầng 20, Tòa nhà công nghệ Azure, TP. Hồ Chí Minh.
-            Phương châm: "Đỉnh cao của sự tinh tế chính là sự đơn giản có tính toán."
-        `;
+    // --- LOGIC LAYER ---
+    class Chatbot {
+        constructor() {
+            this.history = [];
+            this.knowledgeBase = "";
+            this.isInitialized = false;
+        }
 
-        const systemPrompt = `Bạn là Trợ Lý Ảo thông minh của thương hiệu AZURE MERIDIAN. 
-        Hãy sử dụng thông tin sau để trả lời khách hàng một cách chuyên nghiệp, tinh tế, và hỗ trợ nhiệt tình.
-        Thông tin thương hiệu:
-        ${brandKnowledge}
-        Yêu cầu:
-        1. Trả lời bằng tiếng Việt.
-        2. TRẢ LỜI NGẮN GỌN, SÚC TÍCH, ĐI THẲNG VÀO VẤN ĐỀ khách hàng hỏi. Tránh liệt kê quá dài dòng trừ khi khách hàng yêu cầu chi tiết.
-        3. Sử dụng định dạng Markdown (đậm, danh sách, ...) để nội dung dễ đọc.
-        4. Luôn giữ phong cách sang trọng, hi-tech phù hợp với thương hiệu.`;
-
-        let messageHistory = [
-            { role: "system", content: systemPrompt }
-        ];
-
-        const defaultWelcome = `
-            <div class="flex gap-3 max-w-[85%]">
-                <div class="w-8 h-8 rounded-full bg-surface-container-highest flex-shrink-0 flex items-center justify-center font-bold text-[10px] text-primary">AI</div>
-                <div class="bg-surface-container-high p-3 rounded-2xl rounded-tl-none">
-                    <p class="text-sm">Xin chào! Tôi là Trợ Lý Ảo của Azure Meridian. Tôi có thể giúp gì cho bạn hôm nay?</p>
-                </div>
-            </div>
-        `;
-
-        // Toggle Chat
-        toggleChat.addEventListener('click', () => {
-            chatWindow.classList.toggle('hidden');
-            chatTooltip.classList.toggle('hidden');
-        });
-
-        closeChat.addEventListener('click', () => {
-            chatWindow.classList.add('hidden');
-            chatTooltip.classList.remove('hidden');
-        });
-
-        // Refresh Logic
-        refreshChat.addEventListener('click', () => {
-            const icon = refreshChat.querySelector('.material-symbols-outlined');
-            icon.classList.add('rotate-anim');
-            
-            setTimeout(() => {
-                chatMessages.innerHTML = defaultWelcome;
-                messageHistory = [{ role: "system", content: systemPrompt }];
-                icon.classList.remove('rotate-anim');
-            }, 500);
-        });
-
-        // Chat Logic
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const message = chatInput.value.trim();
-            if (!message) return;
-
-            // Add user message to UI
-            addMessage(message, 'user');
-            chatInput.value = '';
-
-            // Add to history
-            messageHistory.push({ role: "user", content: message });
-
-            // Show typing indicator
-            typingIndicator.classList.remove('hidden');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
+        /**
+         * 1. Load Knowledge Base from chatbot_data.txt
+         */
+        async init() {
             try {
-                // OpenAI API Call
+                // Fetch context from chatbot_data.txt
+                const response = await fetch(CONFIG.DATA_FILE);
+                this.knowledgeBase = await response.text();
+                this.history = [{ role: "system", content: this.generateSystemPrompt() }];
+                this.isInitialized = true;
+                console.log("Chatbot Initialized with Knowledge Base.");
+            } catch (err) {
+                console.error("Failed to load knowledge base:", err);
+                this.knowledgeBase = "Liên hệ Azure Meridian: support@azuremeridian.com";
+            }
+        }
+
+        /**
+         * 4. Logic SYSTEM PROMPT
+         */
+        generateSystemPrompt() {
+            return `Vai trò: Bạn là Trợ lý AI độc quyền của chuyên gia Azure Meridian. 
+            
+            CHỈ ĐƯỢC TRẢ LỜI DỰA TRÊN DỮ LIỆU SAU (KNOWLEDGE BASE):
+            ---
+            ${this.knowledgeBase}
+            ---
+            
+            QUY TẮC PHỤC VỤ (BẮT BUỘC):
+            1. LUÔN chào hỏi thân thiện bằng tiếng Việt.
+            2. TRẢ LỜI RÕ RÀNG, súc tích, đi thẳng vào câu hỏi khách hàng muốn hỏi.
+            3. Dùng Markdown đẹp (tiêu đề, đậm, danh sách).
+            4. LUÔN kết thúc bằng lời mời đặt thêm câu hỏi (VD: "Bạn có cần tôi hỗ trợ gì thêm về sản phẩm này không?").
+            5. Nếu câu hỏi NGOÀI PHẠM VI dữ liệu trên → từ chối nhẹ nhàng và hướng dẫn khách hàng liên hệ Hotline/Zalo 0988.777.999 hoặc Email support@azuremeridian.com để được giải đáp chính xác nhất.
+            
+            Phong cách: Sang trọng, Hi-tech, Chuyên nghiệp.`;
+        }
+
+        async sendMessage(userText) {
+            this.history.push({ role: "user", content: userText });
+            
+            try {
                 const completion = await openai.chat.completions.create({
-                    messages: messageHistory,
-                    model: "ces-chatbot-gpt-5.4",
+                    messages: this.history,
+                    model: CONFIG.MODEL,
+                    temperature: 0.7
                 });
 
-                const botResponse = completion.choices[0].message.content;
-
-                // Hide typing indicator and add response
-                typingIndicator.classList.add('hidden');
-                addMessage(botResponse, 'bot');
-                
-                // Add bot response to history
-                messageHistory.push({ role: "assistant", content: botResponse });
+                const botReply = completion.choices[0].message.content;
+                this.history.push({ role: "assistant", content: botReply });
+                return botReply;
 
             } catch (error) {
-                console.error("AI Error:", error);
-                typingIndicator.classList.add('hidden');
-                addMessage("Xin lỗi, hiện tại tôi đang gặp chút sự cố kết nối. Vui lòng thử lại sau giây lát!", 'bot');
+                console.error("API Error:", error);
+                throw error;
             }
-        });
+        }
 
-        function addMessage(text, side) {
+        reset() {
+            this.history = [{ role: "system", content: this.generateSystemPrompt() }];
+        }
+    }
+
+    // --- UI INTERACTION LAYER ---
+    document.addEventListener('DOMContentLoaded', async () => {
+        const bot = new Chatbot();
+        await bot.init();
+
+        // DOM Elements
+        const elements = {
+            toggle: document.getElementById('toggleChat'),
+            close: document.getElementById('closeChat'),
+            window: document.getElementById('chatWindow'),
+            tooltip: document.getElementById('chatTooltip'),
+            refresh: document.getElementById('refreshChat'),
+            messages: document.getElementById('chatMessages'),
+            form: document.getElementById('chatForm'),
+            input: document.getElementById('chatInput'),
+            indicator: document.getElementById('typingIndicator')
+        };
+
+        const WELCOME_MSG = "Xin chào! Tôi là Trợ lý AI của Azure Meridian. Tôi có thể hỗ trợ gì cho bạn về các giải pháp phụ kiện công nghệ cao cấp hôm nay?";
+
+        // Initial UI State
+        renderMessage(WELCOME_MSG, 'bot');
+
+        // Toggle Logic with Smooth Animations
+        elements.toggle.onclick = () => {
+            const isHidden = elements.window.classList.contains('hidden');
+            if (isHidden) {
+                elements.window.classList.remove('hidden');
+                setTimeout(() => {
+                    elements.window.classList.replace('opacity-0', 'opacity-100');
+                    elements.window.classList.replace('translate-y-4', 'translate-y-0');
+                    elements.window.classList.replace('scale-95', 'scale-100');
+                }, 10);
+            } else {
+                closeChatUI();
+            }
+        };
+
+        elements.close.onclick = closeChatUI;
+
+        function closeChatUI() {
+            elements.window.classList.replace('opacity-100', 'opacity-0');
+            elements.window.classList.replace('translate-y-0', 'translate-y-4');
+            elements.window.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => elements.window.classList.add('hidden'), 300);
+        }
+
+        // Refresh Logic
+        elements.refresh.onclick = () => {
+            const icon = elements.refresh.querySelector('.material-symbols-outlined');
+            icon.classList.add('rotate-anim');
+            setTimeout(() => {
+                bot.reset();
+                elements.messages.innerHTML = '';
+                renderMessage(WELCOME_MSG, 'bot');
+                icon.classList.remove('rotate-anim');
+            }, 500);
+        };
+
+        // Form Submit
+        elements.form.onsubmit = async (e) => {
+            e.preventDefault();
+            const text = elements.input.value.trim();
+            if (!text) return;
+
+            renderMessage(text, 'user');
+            elements.input.value = '';
+
+            // Show loading
+            elements.indicator.classList.remove('hidden');
+            scrollToBottom();
+
+            try {
+                const response = await bot.sendMessage(text);
+                elements.indicator.classList.add('hidden');
+                renderMessage(response, 'bot');
+            } catch (err) {
+                elements.indicator.classList.add('hidden');
+                renderMessage("Rất tiếc, kết nối đến trung tâm AI đang bị gián đoạn. Bạn vui lòng thử lại trong giây lát hoặc liên hệ Hotline nhé!", 'bot');
+            }
+        };
+
+        /**
+         * UI Helper: Render Message
+         */
+        function renderMessage(text, side) {
             const div = document.createElement('div');
-            div.className = side === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[85%]';
+            div.className = side === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[90%] fade-in';
             
             if (side === 'user') {
                 div.innerHTML = `
-                    <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%]">
-                        <p class="text-sm text-on-primary">${text}</p>
+                    <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-md">
+                        <p class="text-xs sm:text-sm text-on-primary leading-relaxed">${text}</p>
                     </div>
                 `;
             } else {
                 div.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-surface-container-highest flex-shrink-0 flex items-center justify-center font-bold text-[10px] text-primary">AI</div>
-                    <div class="bg-surface-container-high p-3 rounded-2xl rounded-tl-none chat-markdown text-sm">
+                    <div class="w-8 h-8 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center font-bold text-[10px] text-primary shadow-sm border border-white/5">AI</div>
+                    <div class="bg-surface-container-high/40 backdrop-blur-sm p-3 rounded-2xl rounded-tl-none chat-markdown text-xs sm:text-sm border border-white/5 shadow-sm">
                         ${marked.parse(text)}
                     </div>
                 `;
             }
             
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            elements.messages.appendChild(div);
+            scrollToBottom();
+        }
+
+        /**
+         * Bonus Logic: Auto Scroll
+         */
+        function scrollToBottom() {
+            elements.messages.scrollTo({
+                top: elements.messages.scrollHeight,
+                behavior: 'smooth'
+            });
         }
     });
 </script>
+
+<style>
+    /* Premium Transitions */
+    .fade-in {
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scrollbar Styling */
+    #chatMessages::-webkit-scrollbar { width: 4px; }
+    #chatMessages::-webkit-scrollbar-track { background: transparent; }
+    #chatMessages::-webkit-scrollbar-thumb { background: rgba(167, 200, 255, 0.1); border-radius: 10px; }
+</style>
 </body></html>
