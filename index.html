@@ -578,6 +578,15 @@
 
 <script type="module">
     /**
+     * Tự động xóa lịch sử và ngăn trình duyệt lưu cache (BFCache) khi F5
+     */
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            window.location.reload(); // Ép vòng lặp tải mới nếu trang lấy từ BFCache
+        }
+    });
+
+    /**
      * 🧠 CHATBOT CORE SYSTEM
      * Tách biệt rõ rệt: UI | Logic | API
      */
@@ -607,6 +616,9 @@
             this.history = [];
             this.knowledgeBase = "";
             this.isInitialized = false;
+            
+            // Explicitly force empty chat history on memory allocation
+            document.getElementById('chatInput').value = '';
         }
 
         /**
