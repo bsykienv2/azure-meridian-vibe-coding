@@ -7,7 +7,7 @@
 
 // 🔧 CẤU HÌNH - THAY ĐỔI THEO THÔNG TIN CỦA BẠN
 const SHEET_NAME = "Leads";
-const SALES_EMAIL = "bsykien.ver2@gmail.com";
+const SALES_EMAIL = "bsykien@gmail.com";
 
 /**
  * Nhận dữ liệu Lead từ Frontend (POST request)
