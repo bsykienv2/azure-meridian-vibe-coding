@@ -4,16 +4,96 @@
 - Định vị: Premium Tech Accessories & Lifestyle Solutions (Phụ kiện công nghệ cao cấp & Giải pháp lối sống số).
 - Tầm nhìn: Mang đến giải pháp tối ưu hóa cuộc sống số thông qua những thiết kế tối giản, tinh tế và vượt trội về hiệu năng.
 - Giải pháp cung cấp: 
-    + Cung cấp phụ kiện công nghệ được tinh tuyển (Ốp lưng, sạc nhanh, tai nghe).
+    + Cung cấp phụ kiện công nghệ được tinh tuyển (Ốp lưng, sạc nhanh, tai nghe, cáp sạc, kính cường lực, hub chuyển đổi, loa Bluetooth, đế sạc không dây).
     + Tech Setup Consultancy: Tư vấn cá nhân hóa không gian làm việc và giải trí.
     + Premium Warranty: Chế độ bảo hành 1 đổi 1 trong vòng 12 tháng.
     + Personalized Accessories: Dịch vụ khắc tên và tùy chỉnh thiết kế riêng.
-- Sản phẩm nổi bật: 
-    + Premium Silicone Case (iPhone 15 Pro Max - Deep Sea Blue): $29.99
-    + GaN 65W Fast Charger (Triple Port - Intelligent Delivery): $39.99
-    + ANC Noise Cancelling Headphones (Wireless Over-ear - Hi-Res Audio): $129.99
+
+## DANH MỤC SẢN PHẨM CHÍNH
+
+### 1. Ốp lưng cao cấp
+- Azure Shield Pro (iPhone 15 Pro Max - Deep Sea Blue): $29.99
+  + Chất liệu: Silicone y tế cao cấp, chống sốc MIL-STD-810G
+  + Thiết kế siêu mỏng 0.8mm, lót nhung bảo vệ mặt lưng
+  + Hỗ trợ sạc không dây MagSafe
+  + Màu sắc: Deep Sea Blue, Midnight Black, Arctic White, Rose Gold
+
+- Azure Armor X (Samsung Galaxy S24 Ultra - Titan Gray): $34.99
+  + Chất liệu: Polycarbonate + TPU viền chống sốc kép
+  + Kính cường lực mặt lưng, chống trầy xước
+  + Có khung kim loại tích hợp, chống va đập 3 mét
+  + Màu sắc: Titan Gray, Onyx Black, Navy Blue
+
+### 2. Sạc nhanh & Cáp sạc
+- Azure Turbo GaN 65W (Triple Port - Intelligent Delivery): $39.99
+  + Công nghệ GaN III, 3 cổng (2 USB-C + 1 USB-A)
+  + Sạc nhanh iPhone 0-50% trong 25 phút
+  + Tự nhận diện thiết bị, phân bổ công suất thông minh
+  + Nhỏ gọn bằng 1/2 sạc thường, an toàn chống quá nhiệt
+
+- Azure PowerLine Pro (Cáp USB-C to Lightning - 1.8m): $19.99
+  + Dây bện Nylon siêu bền, chịu 30.000 lần uốn gập
+  + Hỗ trợ sạc nhanh PD 27W + truyền dữ liệu 480Mbps
+  + Đầu cắm nhôm nguyên khối, mạ vàng chống oxi hóa
+  + Tặng kèm dây buộc velcro
+
+### 3. Tai nghe
+- Azure SoundPro ANC (Wireless Over-ear - Hi-Res Audio): $129.99
+  + Chống ồn chủ động ANC -40dB, chế độ xuyên âm
+  + Driver 40mm Hi-Res Audio, codec LDAC & aptX HD
+  + Pin 60 giờ, sạc nhanh 10 phút nghe 5 giờ
+  + Đệm tai Memory Foam, trọng lượng chỉ 250g
+  + Kết nối Bluetooth 5.3 Multipoint (2 thiết bị cùng lúc)
+
+- Azure BudsPro TWS (True Wireless - Active Noise Cancelling): $89.99
+  + ANC chủ động, 4 mic lọc ồn cuộc gọi HD
+  + Driver 12mm Titanium, âm thanh Hi-Fi 360°
+  + Pin 8h (case 32h), sạc không dây Qi
+  + Chống nước IPX5, phù hợp thể thao
+  + Cảm ứng chạm thông minh, Google Fast Pair
+
+### 4. Kính cường lực
+- Azure ScreenGuard 9H (iPhone 15 Pro Max): $14.99
+  + Kính cường lực 9H, chống trầy bằng dao
+  + Lớp oleophobic chống bám vân tay
+  + Full màn hình viền cong 3D, không bọt khí
+  + Tặng kèm kit dán + khăn lau
+
+### 5. Hub chuyển đổi & Phụ kiện bàn làm việc
+- Azure HubMax 7-in-1 USB-C Hub: $49.99
+  + 7 cổng: HDMI 4K@60Hz, 2x USB 3.0, USB-C PD 100W, SD/TF, Ethernet
+  + Vỏ nhôm nguyên khối tản nhiệt tốt
+  + Tương thích MacBook, iPad Pro, Surface, laptop USB-C
+  + Nhỏ gọn, nặng chỉ 65g
+
+### 6. Loa Bluetooth
+- Azure SoundBox Mini (Portable Bluetooth Speaker): $59.99
+  + Công suất 20W, bass sâu vượt kích thước
+  + Pin 12 giờ, chống nước IPX7 (ngâm nước 30 phút)
+  + Ghép đôi 2 loa Stereo, đèn LED rhythm
+  + Thiết kế nhôm nguyên khối, chỉ 380g
+
+### 7. Đế sạc không dây
+- Azure ChargePad Duo (Dual Wireless Charger): $44.99
+  + Sạc 2 thiết bị cùng lúc (điện thoại + tai nghe)
+  + Công suất 15W Qi2, tương thích MagSafe
+  + LED chỉ báo trạng thái, chống vật lạ FOD
+  + Mặt kính cường lực, đế cao su chống trượt
+
+### 8. Miếng dán PPF mặt lưng
+- Azure SkinWrap PPF (iPhone/Samsung): $12.99
+  + Film PPF tự phục hồi vết trầy nhẹ
+  + Siêu mỏng 0.15mm, cảm giác mờ matte cao cấp
+  + Chống bám vân tay, dễ dán không bọt khí
+  + Có mẫu: Clear, Matte, Carbon Fiber
+
+## CHÍNH SÁCH
 - Phương châm: "Đỉnh cao của sự tinh tế chính là sự đơn giản có tính toán."
-- Liên hệ tư vấn: 
-    + Email: support@azuremeridian.com
-    + Hotline/Zalo: 0988.777.999
-    + Văn phòng: Tầng 20, Tòa nhà công nghệ Azure, TP. Hồ Chí Minh.
+- Bảo hành: 1 đổi 1 trong 12 tháng cho tất cả sản phẩm chính hãng Azure Meridian.
+- Giao hàng: Miễn phí giao hàng nội thành TP.HCM cho đơn từ $30. Giao toàn quốc 1-3 ngày.
+- Đổi trả: 7 ngày đổi trả miễn phí nếu lỗi sản xuất.
+
+## LIÊN HỆ TƯ VẤN
+- Email: support@azuremeridian.com
+- Hotline/Zalo: 0988.777.999
+- Văn phòng: Tầng 20, Tòa nhà công nghệ Azure, TP. Hồ Chí Minh.
