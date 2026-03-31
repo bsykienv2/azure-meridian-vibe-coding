@@ -840,14 +840,7 @@
                 console.warn('⚠️ Fetch failed, trying backup method...');
             }
 
-            // Phương thức backup: navigator.sendBeacon (không bị CORS block)
-            try {
-                const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-                const sent = navigator.sendBeacon(CONFIG.APPS_SCRIPT_URL, blob);
-                console.log(sent ? '✅ Lead sent via sendBeacon' : '⚠️ sendBeacon failed');
-            } catch (err) {
-                console.warn('⚠️ sendBeacon not available');
-            }
+            // (Deleted redundant sendBeacon method to prevent duplicate emails)
         }
 
         // Form Submit
