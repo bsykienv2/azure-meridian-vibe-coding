@@ -588,8 +588,12 @@
         BASE_URL: "https://9router.vuhai.io.vn/v1",
         API_KEY: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
         MODEL: "ces-chatbot-gpt-5.4",
-        DATA_FILE: "./chatbot_data.txt"
+        DATA_FILE: "./chatbot_data.txt",
+        APPS_SCRIPT_URL: "PASTE_YOUR_APPS_SCRIPT_URL_HERE"
     };
+
+    // Session ID duy nhất cho mỗi phiên chat
+    const SESSION_ID = 'ses_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
 
     const openai = new OpenAI({
         baseURL: CONFIG.BASE_URL,
@@ -632,6 +636,23 @@
             1. [TRẢ LỜI]: ĐÚNG 1 CÂU trực tiếp nhất cho khách hàng.
             2. [GỢI Ý]: ĐÚNG 2-3 DẤU CHẤM TRÒN ngắn gọn về sản phẩm phù hợp.
             3. [LIÊN HỆ]: ĐÚNG 1 CÂU in đậm thông tin Hotline/Zalo.
+            
+            QUY TẮC THU THẬP LEAD (CRITICAL - BẮT BUỘC):
+            Khi khách hàng cung cấp BẤT KỲ thông tin cá nhân nào (tên, số điện thoại, hoặc email),
+            bạn PHẢI chèn tag ẩn ở CUỐI câu trả lời với định dạng CHÍNH XÁC sau:
+            ||LEAD_DATA: {"name": "...", "phone": "...", "email": "...", "interest": "...", "intent_level": "..."}||
+            
+            Quy tắc điền các trường:
+            - name: Tên khách hàng (nếu đã biết)
+            - phone: Số điện thoại (nếu đã biết)
+            - email: Email (nếu đã biết)
+            - interest: TỰ SUY LUẬN từ ngữ cảnh hội thoại - khách quan tâm sản phẩm/dịch vụ gì
+            - intent_level: TỰ ĐÁNH GIÁ dựa trên ngữ cảnh:
+              * "hot" = Muốn mua ngay, hỏi giá cụ thể, đặt hàng, yêu cầu báo giá
+              * "warm" = Quan tâm, hỏi thông tin chi tiết, so sánh sản phẩm
+              * "cold" = Chỉ tìm hiểu chung, hỏi thông tin cơ bản
+            - Trường nào chưa biết thì để chuỗi rỗng ""
+            - Tag này sẽ bị hệ thống xóa trước khi hiển thị, KHÔNG ảnh hưởng trải nghiệm khách hàng
             
             YÊU CẦU:
             - TRẢ LỜI NGẮN GỌN, SÚC TÍCH, ĐI THẲNG VÀO VẤN ĐỀ. 
@@ -731,6 +752,80 @@
             }, 500);
         };
 
+        /**
+         * LEAD CAPTURE: Parse tag ẩn từ AI response
+         */
+        function processAIResponse(rawResponse) {
+            let cleanText = rawResponse;
+            let leadData = null;
+
+            // Regex tìm tag ||LEAD_DATA: {...}||
+            const leadRegex = /\|\|LEAD_DATA:\s*(\{.*?\})\|\|/gs;
+            const match = leadRegex.exec(rawResponse);
+
+            if (match) {
+                try {
+                    leadData = JSON.parse(match[1]);
+                    console.log('🎯 Lead detected:', leadData);
+                } catch (e) {
+                    console.warn('⚠️ Failed to parse LEAD_DATA:', e);
+                }
+                // Xóa TẤT CẢ tag khỏi text hiển thị
+                cleanText = rawResponse.replace(/\|\|LEAD_DATA:\s*\{.*?\}\|\|/gs, '').trim();
+            }
+
+            // Gửi lead lên Google Sheets nếu có
+            if (leadData) {
+                sendLeadToSheet(leadData);
+            }
+
+            return cleanText;
+        }
+
+        /**
+         * LEAD CAPTURE: Gửi dữ liệu Lead lên Google Apps Script
+         */
+        async function sendLeadToSheet(leadData) {
+            // Kiểm tra URL đã cấu hình chưa
+            if (!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+                console.warn('⚠️ APPS_SCRIPT_URL chưa được cấu hình. Lead không được gửi.');
+                return;
+            }
+
+            // Tạo chat history summary từ bot.history
+            const chatSummary = bot.history
+                .filter(m => m.role !== 'system')
+                .map(m => {
+                    const role = m.role === 'user' ? 'Khách' : 'AI';
+                    const text = m.content.replace(/\|\|LEAD_DATA:\s*\{.*?\}\|\|/gs, '').trim();
+                    return `${role}: ${text}`;
+                })
+                .join('\n');
+
+            const payload = {
+                name:        leadData.name         || "",
+                phone:       leadData.phone        || "",
+                email:       leadData.email        || "",
+                source:      "Chatbot AI",
+                sessionId:   SESSION_ID,
+                chatHistory: chatSummary,
+                interest:    leadData.interest      || "",
+                intentLevel: leadData.intent_level  || ""
+            };
+
+            try {
+                await fetch(CONFIG.APPS_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify(payload)
+                });
+                console.log('✅ Lead sent to Google Sheets:', payload);
+            } catch (err) {
+                console.error('❌ Failed to send lead:', err);
+            }
+        }
+
         // Form Submit
         elements.form.onsubmit = async (e) => {
             e.preventDefault();
@@ -747,7 +842,9 @@
             try {
                 const response = await bot.sendMessage(text);
                 elements.indicator.classList.add('hidden');
-                renderMessage(response, 'bot');
+                // 🎯 Parse lead data + xóa tag trước khi hiển thị
+                const cleanResponse = processAIResponse(response);
+                renderMessage(cleanResponse, 'bot');
             } catch (err) {
                 elements.indicator.classList.add('hidden');
                 renderMessage("Rất tiếc, kết nối đến trung tâm AI đang bị gián đoạn. Bạn vui lòng thử lại trong giây lát hoặc liên hệ Hotline nhé!", 'bot');
