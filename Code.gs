@@ -99,11 +99,11 @@ function sendHotLeadAlert(lead) {
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f5f0eb; padding:30px 0;">
     <tr>
       <td align="center">
-        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+        <table role="presentation" width="900" cellspacing="0" cellpadding="0" border="0" style="background-color:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
 
           <!-- ===== HEADER BANNER ===== -->
           <tr>
-            <td style="background: linear-gradient(135deg, #1a2332 0%, #2d4a7a 50%, #4a90d9 100%); padding:28px 40px; text-align:center;">
+            <td style="background: linear-gradient(135deg, #1a2332 0%, #2d4a7a 50%, #4a90d9 100%); padding:12px 40px; text-align:center;">
               <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:700; letter-spacing:1px;">
                 AZURE MERIDIAN
               </h1>
@@ -115,9 +115,9 @@ function sendHotLeadAlert(lead) {
 
           <!-- ===== TIÊU ĐỀ CẢNH BÁO ===== -->
           <tr>
-            <td style="padding:32px 40px 16px;">
+            <td style="padding:24px 40px 16px; text-align:center;">
               <h2 style="margin:0; color:#c0392b; font-size:22px; font-weight:700;">
-                🔥 Khách hàng nóng sắp đến!
+                THÔNG TIN KHÁCH HÀNG "NÓNG"
               </h2>
             </td>
           </tr>
@@ -125,10 +125,10 @@ function sendHotLeadAlert(lead) {
           <!-- ===== LỜI CHÀO ===== -->
           <tr>
             <td style="padding:0 40px 20px;">
-              <p style="margin:0; color:#444; font-size:15px; line-height:1.6;">
+              <p style="margin:0; color:#444; font-size:15px; line-height:1.3;">
                 Xin chào đội Sales, 
               </p>
-              <p style="margin:10px 0 0; color:#444; font-size:15px; line-height:1.6;">
+              <p style="margin:10px 0 0; color:#444; font-size:15px; line-height:1.3;">
                 Hệ thống AI Chatbot vừa phát hiện một khách hàng <strong style="color:#c0392b;">tiềm năng cao</strong> đang rất quan tâm đến sản phẩm. Hãy liên hệ ngay! ⚡
               </p>
             </td>
@@ -138,7 +138,7 @@ function sendHotLeadAlert(lead) {
           <tr>
             <td style="padding:0 40px 24px;">
               <div style="border-left: 4px solid #e74c3c; background-color:#fdf2f2; padding:16px 20px; border-radius:0 8px 8px 0;">
-                <p style="margin:0; color:#c0392b; font-size:14px; font-style:italic; line-height:1.5;">
+                <p style="margin:0; color:#c0392b; font-size:14px; font-style:italic; line-height:1.3;">
                   Liên hệ khách hàng trong vòng <strong>30 phút</strong> để tối ưu tỷ lệ chuyển đổi! 🎯
                 </p>
               </div>
@@ -152,20 +152,20 @@ function sendHotLeadAlert(lead) {
 
                 <!-- Row: Tên -->
                 <tr>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0; width:130px;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0; width:130px;">
                     <span style="color:#888; font-size:13px;">👤 Tên khách</span>
                   </td>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <strong style="color:#1a2332; font-size:15px;">${customerName}</strong>
                   </td>
                 </tr>
 
                 <!-- Row: SĐT -->
                 <tr>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="color:#888; font-size:13px;">📱 Số điện thoại</span>
                   </td>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <a href="tel:${customerPhone}" style="color:#2d4a7a; font-size:15px; font-weight:600; text-decoration:none;">
                       ${customerPhone}
                     </a>
@@ -174,10 +174,10 @@ function sendHotLeadAlert(lead) {
 
                 <!-- Row: Email -->
                 <tr>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="color:#888; font-size:13px;">📧 Email</span>
                   </td>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <a href="mailto:${customerEmail}" style="color:#2d4a7a; font-size:14px; text-decoration:none;">
                       ${customerEmail}
                     </a>
@@ -186,20 +186,20 @@ function sendHotLeadAlert(lead) {
 
                 <!-- Row: Quan tâm -->
                 <tr>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="color:#888; font-size:13px;">🛒 Quan tâm</span>
                   </td>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="color:#333; font-size:14px;">${customerInterest}</span>
                   </td>
                 </tr>
 
                 <!-- Row: Mức độ -->
                 <tr>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="color:#888; font-size:13px;">🌡️ Mức độ</span>
                   </td>
-                  <td style="padding:14px 20px; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 20px; border-bottom:1px solid #f0f0f0;">
                     <span style="display:inline-block; background: linear-gradient(135deg, #e74c3c, #c0392b); color:#fff; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700; letter-spacing:0.5px;">
                       🔥 HOT — Ưu tiên cao
                     </span>
@@ -208,10 +208,10 @@ function sendHotLeadAlert(lead) {
 
                 <!-- Row: Thời gian -->
                 <tr>
-                  <td style="padding:14px 20px;">
+                  <td style="padding:10px 20px;">
                     <span style="color:#888; font-size:13px;">🕐 Thời gian</span>
                   </td>
-                  <td style="padding:14px 20px;">
+                  <td style="padding:10px 20px;">
                     <span style="color:#666; font-size:14px;">${timeCapture}</span>
                   </td>
                 </tr>
