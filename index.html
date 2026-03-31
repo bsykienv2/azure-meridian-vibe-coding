@@ -881,6 +881,8 @@
         /**
          * UI Helper: Render Message
          */
+        marked.setOptions({ breaks: true });
+        
         function renderMessage(text, side) {
             const div = document.createElement('div');
             div.className = side === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[90%] fade-in';
